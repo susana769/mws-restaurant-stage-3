@@ -1,12 +1,12 @@
 # Local Development API Server
-##First step: run Server:
+## First step: run Server:
 	· Download the code in https://github.com/susana769/mws-restaurant-stage-3-server
 	· Run console and execute:
 	 	npm i
 	 	npm i sails -g
 	 	npm start
  
-##Second step:
+## Second step:
 	· Download the code in the current repository
 	· Run console and execute:
 		npm install
