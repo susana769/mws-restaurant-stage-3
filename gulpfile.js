@@ -1,9 +1,5 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-
-gulp.task('default', function() {
-	console.log('hello world');
-});
+let gulp = require('gulp');
+let sass = require('gulp-sass');
 
 
 gulp.task('styles', function() {
