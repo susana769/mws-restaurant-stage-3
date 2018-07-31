@@ -7,7 +7,7 @@ class DBHelper {
    * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
-    const port = 1337 // Change this to your server port
+    const port = 1337; // Change this to your server port
     return `http:\//localhost:${port}/restaurants`;
   }
 
@@ -19,11 +19,11 @@ class DBHelper {
     }
 
     return idb.open('restaurantDb', 1, function(upgradeDb){
-      var store = upgradeDb.createObjectStore('restaurantDb', {
+      let store = upgradeDb.createObjectStore('restaurantDb', {
         keyPath: 'id'
       });
       store.createIndex('by-id', 'id');
-      var reviewStore = upgradeDb.createObjectStore('reviewsDb', {keyPath: 'id'});
+      upgradeDb.createObjectStore('reviewsDb', {keyPath: 'id'});
     });
   }
 
@@ -31,13 +31,12 @@ class DBHelper {
     return DBHelper.openDatabase().then(function(db){
       if(!db) return;
 
-      var tx = db.transaction('reviewsDb', 'readwrite');
-      var store = tx.objectStore('reviewsDb');
+      var transaction = db.transaction('reviewsDb', 'readwrite');
+      var store = transaction.objectStore('reviewsDb');
       reviews.forEach(function(review){
-        console.log(review)
         store.put(review);
       });
-      return tx.complete;
+      return transaction.complete;
     });
   }
 
@@ -56,12 +55,12 @@ class DBHelper {
     return DBHelper.openDatabase().then(function(db){
       if(!db) return;
 
-      var tx = db.transaction('restaurantDb', 'readwrite');
-      var store = tx.objectStore('restaurantDb');
+      let transaction = db.transaction('restaurantDb', 'readwrite');
+      let store = transaction.objectStore('restaurantDb');
       data.forEach(function(restaurant){
         store.put(restaurant);
       });
-      return tx.complete;
+      return transaction.complete;
     });
   }
 
@@ -78,15 +77,15 @@ class DBHelper {
             response.json()
             .then(data => { writeReviewsData('reviewsStore',  data);
         return data;
-    })
+    });
         callback(null)
     })
-    .catch(error => {
+    .catch(() => {
             data['updatedAt'] = new Date().getTime();
             data['createdAt'] = new Date().getTime();
 
             writeReviewsDataOffline('review2',data);
-    });
+      });
     }
 
   static addRestaurantsFromAPI(){
@@ -103,7 +102,7 @@ class DBHelper {
     return DBHelper.openDatabase().then(function(db){
       if(!db) return;
 
-      var store = db.transaction('restaurantDb').objectStore('restaurantDb');
+      const store = db.transaction('restaurantDb').objectStore('restaurantDb');
       return store.getAll();
     });
   }
@@ -127,10 +126,6 @@ class DBHelper {
     })
   }
 
-
-
-
-
   /* Fetch a restaurant by id */
   static fetchRestaurantById(id, callback) {
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -147,42 +142,17 @@ class DBHelper {
     });
   }
 
-  /* Fetch restaurants by a cuisine */
-  static fetchRestaurantByCuisine(cuisine, callback) {
-    DBHelper.fetchRestaurants((error, restaurants) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        const results = restaurants.filter(r => r.cuisine_type == cuisine);
-        callback(null, results);
-      }
-    });
-  }
-
-  /* Fetch restaurants by neighborhood */
-  static fetchRestaurantByNeighborhood(neighborhood, callback) {
-
-    DBHelper.fetchRestaurants((error, restaurants) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        const results = restaurants.filter(r => r.neighborhood == neighborhood);
-        callback(null, results);
-      }
-    });
-  }
-
   /* Fetch restaurants by a cuisine and one neighborhood */
   static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, callback) {
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
         callback(error, null);
       } else {
-        let results = restaurants
-        if (cuisine != 'all') { 
-          results = results.filter(r => r.cuisine_type == cuisine);
+        let results = restaurants;
+        if (cuisine !== 'all') {
+          results = results.filter(r => r.cuisine_type === cuisine);
         }
-        if (neighborhood != 'all') {
+        if (neighborhood !== 'all') {
           results = results.filter(r => r.neighborhood == neighborhood);
         }
         callback(null, results);
@@ -196,8 +166,8 @@ class DBHelper {
       if (error) {
         callback(error, null);
       } else {
-        const neighborhoods = restaurants.map((v, i) => restaurants[i].neighborhood)
-        const uniqueNeighborhoods = neighborhoods.filter((v, i) => neighborhoods.indexOf(v) == i)
+        const neighborhoods = restaurants.map((v, i) => restaurants[i].neighborhood);
+        const uniqueNeighborhoods = neighborhoods.filter((v, i) => neighborhoods.indexOf(v) == i);
         callback(null, uniqueNeighborhoods);
       }
     });
@@ -209,8 +179,8 @@ class DBHelper {
       if (error) {
         callback(error, null);
       } else {
-        const cuisines = restaurants.map((v, i) => restaurants[i].cuisine_type)
-        const uniqueCuisines = cuisines.filter((v, i) => cuisines.indexOf(v) == i)
+        const cuisines = restaurants.map((v, i) => restaurants[i].cuisine_type);
+        const uniqueCuisines = cuisines.filter((v, i) => cuisines.indexOf(v) == i);
         callback(null, uniqueCuisines);
       }
     });
@@ -229,13 +199,12 @@ class DBHelper {
 
   /* Map marker for a restaurant */
   static mapMarkerForRestaurant(restaurant, map) {
-    const marker = new google.maps.Marker({
-      position: restaurant.latlng,
-      title: restaurant.name,
-      url: DBHelper.urlForRestaurant(restaurant),
-      map: map,
-      animation: google.maps.Animation.DROP}
+      return new google.maps.Marker({
+        position: restaurant.latlng,
+        title: restaurant.name,
+        url: DBHelper.urlForRestaurant(restaurant),
+        map: map,
+        animation: google.maps.Animation.DROP}
     );
-    return marker;
   }
 }
