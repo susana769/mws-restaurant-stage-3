@@ -9,14 +9,15 @@
 	 	npm start
  
 ## Second step:
-	· Download the code in the current repository
+	· Download, in a diferent directory, the code in the current repository
 	· Run console and execute:
 		npm install
 		python -m http.server 8000
 
-	NOTE: depend of your Python version, you should type:
+	NOTE: for Python version 2.x you should type:
 		python -m SimpleHTTPServer 8000
-		visit localhost 8000
+	
+	· Go to localhost:8000
 
 
 ## Usage
