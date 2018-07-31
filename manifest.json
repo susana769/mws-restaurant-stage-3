@@ -4,22 +4,22 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "/img/launcher-icon-1x.png",
+      "src": "/images_src/launcher-icon-1x.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "/img/launcher-icon-2x.png",
+      "src": "/images_src/launcher-icon-2x.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "/img/launcher-icon-4x.png",
+      "src": "/images_src/launcher-icon-4x.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/img/launcher-icon-large.png",
+      "src": "/images_src/launcher-icon-large.png",
       "type": "image/png",
       "sizes": "512x512"
     }

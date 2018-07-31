@@ -17,7 +17,7 @@ self.addEventListener('install', function(event) {
                         '/js/dbhelper.js',
                         '/js/main.js',
                         '/js/restaurant_info.js',
-                        '/img/1.jpg',
+                     /*   '/img/1.jpg',
                         '/img/1_medium.jpg',
                         '/img/2.jpg',
                         '/img/2_medium.jpg',
@@ -37,8 +37,8 @@ self.addEventListener('install', function(event) {
                         '/img/9_medium.jpg',
                         '/img/10.jpg',
                         '/img/10_medium.jpg',
-                        '/img/fixed/logo.svg', 
-                      /*  '/images_src/emily.jpg',
+                        '/img/fixed/logo.svg', */
+                        '/images_src/emily.jpg',
                         '/images_src/emily_medium.jpg',
                         '/images_src/casaenrique.jpg',
                         '/images_src/casaenrique_medium.jpg',
@@ -59,7 +59,7 @@ self.addEventListener('install', function(event) {
                         '/images_src/superiorityburger_medium.jpg',
                         '/images_src/thedutch.jpg',
                         '/images_src/thedutch_medium.jpg',
-                        '/images_src/fixed/logo.svg', */
+                        '/images_src/fixed/logo.svg', 
                         '/?utm_source=homescreen',
                         '/404.html'
                     ]);

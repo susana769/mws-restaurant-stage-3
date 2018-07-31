@@ -11,29 +11,6 @@ class DBHelper {
     return `http:\//localhost:${port}/restaurants`;
   }
 
-  /**
-   * Fetch all restaurants.
-   */
-   /*
-  static fetchRestaurants(callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', DBHelper.DATABASE_URL);
-    xhr.onload = () => {
-      if (xhr.status === 200) { // Got a success response from server!
-        const json = JSON.parse(xhr.responseText);
-        const restaurants = json.restaurants;
-        callback(null, restaurants);
-      } else { // Oops!. Got an error from server.
-        const error = (`Request failed. Returned status of ${xhr.status}`);
-        callback(error, null);
-      }
-    };
-    xhr.send();
-  }
-*/
-
-
-
   static openDatabase() {
     // If the browser doesn't support service worker,
     // we don't care about having a database
@@ -57,6 +34,7 @@ class DBHelper {
       var tx = db.transaction('reviewsDb', 'readwrite');
       var store = tx.objectStore('reviewsDb');
       reviews.forEach(function(review){
+        console.log(review)
         store.put(review);
       });
       return tx.complete;
@@ -86,6 +64,30 @@ class DBHelper {
       return tx.complete;
     });
   }
+
+   static submitReview(data, callback) {
+        return fetch('http://localhost:1337/reviews', {
+            body: JSON.stringify(data),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+        })
+            .then(response => {
+            response.json()
+            .then(data => { writeReviewsData('reviewsStore',  data);
+        return data;
+    })
+        callback(null)
+    })
+    .catch(error => {
+            data['updatedAt'] = new Date().getTime();
+            data['createdAt'] = new Date().getTime();
+
+            writeReviewsDataOffline('review2',data);
+    });
+    }
 
   static addRestaurantsFromAPI(){
     return fetch(DBHelper.DATABASE_URL)
