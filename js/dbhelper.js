@@ -75,7 +75,8 @@ class DBHelper {
         })
             .then(response => {
             response.json()
-            .then(data => { writeReviewsData('reviewsStore',  data);
+           // .then(data => { writeReviewsData('reviewsStore',  data);
+           .then(data => { writeReviewsData('reviewsStore',  data);
         return data;
     });
         callback(null)
@@ -88,15 +89,15 @@ class DBHelper {
       });
     }
 
-  static addRestaurantsFromAPI(){
-    return fetch(DBHelper.DATABASE_URL)
-      .then(function(response){
-        return response.json();
-    }).then(restaurants => {
-      DBHelper.saveRestaurantToDatabase(restaurants);
-      return restaurants;
-    });
-  }
+static addRestaurantsFromAPI(){
+  return fetch(DBHelper.DATABASE_URL)
+    .then(function(response){
+      return response.json();
+  }).then(restaurants => {
+    DBHelper.saveRestaurantToDatabase(restaurants);
+    return restaurants;
+  });
+}
 
   static getCachedRestaurants() {
     return DBHelper.openDatabase().then(function(db){
