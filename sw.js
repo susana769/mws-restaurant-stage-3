@@ -12,7 +12,6 @@ self.addEventListener('install', function(event) {
                         '/index.html',
                         '/restaurant.html',
                         '/css/styles.css',
-                        '/data/restaurants.json',
                         '/js/idb.js',
                         '/js/dbhelper.js',
                         '/js/main.js',
@@ -72,6 +71,25 @@ self.addEventListener('activate', function(event) {
     );
 });
 
+/* If a request doesn't match anything in the cache, get it from the network,
+send it to the page and add it to the cache at the same time.*/
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.open(staticCacheName).then(function(cache) {
+      return cache.match(event.request).then(function(response) {
+        return response || fetch(event.request).then(function(response) {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      });
+    })
+    .catch(err => console.log(err, event.request))
+  );
+});
+
+
+/*
+
 addEventListener('fetch', event => {
   // Permite al navegador hacer este asunto por defecto
   // para peticiones non-GET.
@@ -108,3 +126,4 @@ if (event.request.method === 'GET') {
     return fetch(event.request);
   }());
 });
+*/
