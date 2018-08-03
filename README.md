@@ -1,11 +1,12 @@
 # How to run the project
 ## First step (run Server):
-	note: Server depends on [node.js LTS Version: v6.11.2 ](https://nodejs.org/en/download/), [npm](https://www.npmjs.com/get-npm), and [sails.js](http://sailsjs.com/)
-	Please make sure you have these installed before proceeding forward.
+	
 
 	· Download the code in: 
 [susana769/mws-restaurant-stage-3-server](https://github.com/susana769/mws-restaurant-stage-3-server)
-
+	note: Server depends on [node.js LTS Version: v6.11.2 ](https://nodejs.org/en/download/), [npm](https://www.npmjs.com/get-npm), and [sails.js](http://sailsjs.com/)
+	Please make sure you have these installed before proceeding forward.
+	
 	· Run console and execute:
 	 	npm i
 	 	npm i sails -g
