@@ -71,8 +71,10 @@ self.addEventListener('activate', function(event) {
     );
 });
 
+
 /* If a request doesn't match anything in the cache, get it from the network,
 send it to the page and add it to the cache at the same time.*/
+
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.open(staticCacheName).then(function(cache) {
@@ -88,9 +90,10 @@ self.addEventListener('fetch', function(event) {
 });
 
 
+
 /*
 
-addEventListener('fetch', event => {
+self.addEventListener('fetch', event => {
   // Permite al navegador hacer este asunto por defecto
   // para peticiones non-GET.
 if (event.request.method === 'GET') {
