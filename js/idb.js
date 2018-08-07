@@ -2,7 +2,8 @@
 
 (function() {
   function toArray(arr) {
-    return Array.prototype.slice.call(arr);
+    return 
+Array.prototype.slice.call(arr);
   }
 
   function promisifyRequest(request) {

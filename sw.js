@@ -38,7 +38,6 @@ self.addEventListener('install', function(event) {
                         '/images_src/thedutch.jpg',
                         '/images_src/thedutch_medium.jpg',
                         '/images_src/fixed/logo.svg', 
-                        '/?utm_source=homescreen',
                         '/404.html'
                     ]);
                 }
