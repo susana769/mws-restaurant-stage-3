@@ -1,4 +1,4 @@
-const cacheName = 'v1';
+const cacheName = 'reviews_cache_v1';
 const filesToCache = [
      'https://fonts.googleapis.com/css?family=Open+Sans:300,600',
       '/',
